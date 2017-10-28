@@ -1,8 +1,7 @@
+
 #!/usr/bin/env python
 
 '''
-PLEASE CHECK assignment1.pdf FOR ANALYSIS AND ANSWERS TO QUESTIONNAIRE 
-
 Assignment 01 
 - Problem 01: Finding an optimized route between a set of start and end city
 - Algorithms implemented: 'A*', 'Uniform Cost', 'BFS', 'DFS'
@@ -14,7 +13,65 @@ Assignment 01
 - There were 19 observations in road-segments.txt with only 4 items; since it was too small 
   in comparision to overall dataset, we removed those observations.
 - We have used Dictionary to create bidirectional graph taking one city at a time as a key and rest all as values. 
-
+- For uniform cost and A*, we have used heapq module for priority queue implementation; 
+  For longtour, we implemented max heap and for remaining cost functions, we implemented min heap
+  
+ Problem Abstraction: - Initial State: Start City (user input)
+                      - State Space: Set of all possible nodes (or cities) that can be traversed along the graph
+                      - Goal: End City (user input)
+                      - Successor Function: Returns list of all nodes (or next connected cities) connected to the current node 
+		        (or current city); Implemened by creating  a dictionary 
+  
+  Edge Weights: - In case of BFS and DFS, since they consider uniform cost for each edge, we have nor alloted any weight to edges
+                  and they would return the same path for each cost function.
+		For uniform cost and A*, edge weights depends upon the cost function:
+		- distance: travelling distance as per the input file provided
+		- time: travelling distance divided by speed for each set of connected nodes (provided in the input file)
+		- segments: one for each edge
+		- longtour: travelling distance 
+		
+ Cost of Node:  Uniform Cost:
+                - distance: Sum of total travelling distance from start city to current node
+		- time : Sum of total time from start city to current node
+		- segments: SUm of total number of edges traversed from start city to current node
+		- longtour: Sum of total travelling distance from start city to current node
+		A*
+		- distance: Sum of travelling distance from start city to current node plus heuristic distance of current node
+		- time : Sum of total time from start city to current node plus heuristic time of current node
+		- segments: sum of total edges traversed from start city to current node plus 1 (used 1 as heuristic for each
+		  node); since we are adding a constant to node cost, it won't have any difference and run similar to uniform 
+		  cost
+		- longtour: Same as distance cost function
+	
+Heuristic Explaination: Mentioned in assignment1.pdf Please check the file
+Searh Algorithm: Uniform Cost: Depends on cost function
+                longtour:
+		- Implemented cost-based priority queue using heapq module. Since, we need to find maximum distance; used 
+		  max heap. This will remove the element with maximum cost from the fringe
+		- Remove eleemnt with maximum cost from the fringe; check if goal, if yes, goal reached; otherwise, get the 
+		  successor, check if already visited, if not, check if already in fringe with lesser cost, if yes, update the
+		  cost, and if not add to the fringe maitaing the max heap property. Keep on iterating until the fringe 
+		  is not empty
+		distance, time, segment:
+		- Used priority queue and implemented min heap using heapq module removing the element with minimum cost from 
+		  the fringe. Similar to above, but with few changes: if the successor is already in the fringe with larger
+		  cost, update the cost. And while, removing from fringe, always remove the one with lowest cost
+		
+		A*: Since, our heuristic was not consistent but admissible, we implemented search algorithm# 2 in which re-visit
+		of states are allowed for optimal results
+		distance, time, segment:
+		- Similar to uniform cost but with no restriciton of revisit of states
+		longtour: 
+		- Similar to uniform cost; since it was mentioned in the problem to not re-visit any city
+		BFS/DFS:
+		- traverse along the path without considering all edges with unit cost
+		- BFS: traverse along the breadth first (queue implementation)
+		- DFS: traverse along the depth first (stack implementation)
+		
+Assumptions/Design : 
+	       - Data: Did few data modifications (mentioned above)
+	       - Multiplied the distance heuristic with 1.2 to enhance the performace of A*
+                 		
 '''
 
 import sys
@@ -101,7 +158,7 @@ def Heuristic(current_state):
 	if lat_goal!=float('inf') and lon_goal!=float('inf') and lat_current!=float('inf') and lon_current!=float('inf'):
 		dlon = lon_goal - lon_current
 		dlat = lat_goal - lat_current
-		a = (sin(dlat/2))**2+cos(lat_current)*cos(lat_goal)*(sin(dlon/2))**2
+		a = (sin(dlat/2))**2+cos(lat_current)*cos(lat_goal)*(sin(dlon/2))**2  #Implemented from here: https://stackoverflow.com/questions/19412462/getting-distance-between-two-points-based-on-latitude-longitude
 		c = 2*atan2(sqrt(a), sqrt(1 - a))
 		if cost_function in ['distance', 'longtour']:
 			if start_city.split(',_')[1]==end_city.split(',_')[1]:			
@@ -265,3 +322,4 @@ def main():
 
 if __name__ == "__main__":
 	main()
+
