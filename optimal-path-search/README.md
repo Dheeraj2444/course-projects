@@ -1,6 +1,6 @@
-In the project, I worked upon to find the best optimal path between a given pair of citiies and compared different graph seach algorithms, namley, Breadth First Search, Dpeth FIrst Search, Uniform Cost, and A-star. 
+In the project, I worked upon to find the best optimal path between a given pair of citiies and compared different graph seach algorithms, namley, Breadth First Search, Depth First Search, Uniform Cost, and A-star. 
 
-The dataset consisits of North American (though mostly U.S.) major roads.
+The dataset consists of North American (though mostly U.S.) major roads.
 
 city-gps.txt contains one line per city, with three fields per line, delimited by spaces. The first field is the city, followed by the latitude, followed by the longitude.
 
