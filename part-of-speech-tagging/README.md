@@ -1,0 +1,3 @@
+ * This project was aimed at building a part-of-speech tagger for the English language. Developed a Hidden Markov Model and used inferences of the Bayes Nets and Naive Bayes to define model abstraction: Initial, Transition, Emission, and State Probabilities and eventually predicting POS tags corresponding to each word in a given sentence. Implemented Variable Elimination (Forward-Backward) Algorithm and Viterbi Algorithm
+
+* The developed model correctly predicted above 50% sentences and above 90% words when tested over 2000 sentences
