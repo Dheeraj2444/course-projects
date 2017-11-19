@@ -1,4 +1,6 @@
-* This repository contains projects that I worked on during my graduate studies
+This repository contains projects those I worked on during my graduate studies
+
+Markup :  ### Overview ###
 
 * n-queens: N-Queen solver
 * optimal-path-search: Comparision of different graph search algorithms
