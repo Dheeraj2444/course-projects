@@ -1,4 +1,4 @@
-* This project was aimed at building multi-class classification models to predict the orientation of a given image. Trained three models, namely, K-Nearest Neighbors, AdaBoost, and Neural Networks over 40K images from Flickr and tested over 1,000 images. Defined multiple decision stumps for weighted predictions in AdaBoost. Implemented Backpropagation along with Gradient Descent in Neural Networks to update weights.
+* This project was aimed at building multi-class classification models to predict the orientation of a given image. Trained three models, namely, K-Nearest Neighbors, AdaBoost, and Neural Networks over 40K images from Flickr and tested over 1,000 images. Defined multiple decision stumps for weighted predictions in AdaBoost. Implemented Backpropagation along with mini-batch Gradient Descent technique in Neural Networks to update weights.
 
 * Problem Statement is available in the file 'problem-statement.pdf'
 
